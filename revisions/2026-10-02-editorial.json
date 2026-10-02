@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-02",
+  "policy_id": "traditional-punctuation-engaging-technical-v1",
+  "research_title": "Opsix Research",
+  "repository": "opsix-net/opsix-research",
+  "previous_repository": "opsix-net/logic-notes",
+  "changes": [
+    "Traditional punctuation; no em dashes.",
+    "More inviting introductions, transitions, and practical reading guidance.",
+    "Updated research collection name and portfolio links."
+  ],
+  "validation": {
+    "em_dash_check": "passed",
+    "technical_examples_preserved": true,
+    "article_words": 1848,
+    "existing_tools_and_tests_unchanged": true
+  },
+  "documents": [
+    {
+      "path": "README.md",
+      "before_sha256": "fc7da7b5ed77ab1cf577cad935e5d0b1ee6cef6f4ded9b5650c910d708b9afb3",
+      "after_sha256": "ae46244fc494211ea44357cf2390f8ee679f2536d810a76abbcefc0d1bcd930a"
+    },
+    {
+      "path": "articles/2026-10-02-trading-applications-data-protocols-safe-boundaries.md",
+      "before_sha256": "62f409246b40fca81fe7916afdb4d80aef8f04b85969a62079257d7f5d22fe32",
+      "after_sha256": "b7002518cab6a494c0071fb6de26bfdbe596f3f26814caa5009fa191c3f433db"
+    }
+  ]
+}

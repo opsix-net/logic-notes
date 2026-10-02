@@ -1,4 +1,6 @@
-# Logic Notes
+# Opsix Research
+
+Curious about how an idea turns into dependable software? Pick a note, follow a worked example, and try the short exercises. There is always another useful connection to make.
 
 Original educational research notes from a technical reading practice. Software engineering, mathematical ideas, scientific computing, and practical automation.
 
