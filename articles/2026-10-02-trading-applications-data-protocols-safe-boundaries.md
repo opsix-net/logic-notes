@@ -1,12 +1,12 @@
 # Trading Applications as Systems: Data, Protocols, and Safe Boundaries
 
-A trading application is not just a rule that says “buy” or “sell.” It is a chain of components: external data arrives, the application interprets it, strategy logic makes a decision, risk checks constrain that decision, and an interface sends an instruction to a venue. A defect at any boundary can invalidate everything downstream. A sound engineering approach therefore treats communication, data quality, decision logic, risk, and order handling as related but separately testable responsibilities.
+Start with a seemingly simple request: buy 12,000 units of EUR/USD at a limit price. Before that request reaches a venue, a trading application has plenty of work to do. External data arrives, the application interprets it, strategy logic proposes an action, risk checks constrain it, and an interface encodes the instruction. Each handoff is a place where a small defect can cause a large problem. Following the request through those handoffs gives us a useful engineering map: communication, data quality, decision logic, risk, and order handling are connected responsibilities that we can test separately.
 
 The selected chapter section emphasizes this architecture and gives particular attention to FIX, a flexible financial messaging standard. It describes FIX messages as tagged fields arranged into a header, body, and trailer; sessions begin with a logon exchange and end with logout; and venue-specific requirements matter. The section also warns against hardcoding complete messages. The discussion below explains those ideas in a fresh engineering frame, including a worked message calculation. It distinguishes protocol concepts from the practical safeguards an application should add around them.
 
-## Start with boundaries, not a strategy function
+## Follow the request through five boundaries
 
-A useful system sketch has five boundaries:
+Trace that request through a compact system sketch. Five boundaries deserve their own checks:
 
 1. **Connectivity:** establish authenticated connections to data providers and trading venues.
 2. **Ingestion and validation:** parse incoming records, check shape and meaning, and retain enough context to diagnose bad data.
@@ -32,7 +32,7 @@ A typical message has three logical parts:
 
 The section explains these fields and describes tags as numeric identifiers for values. It also states that tags should not be repeated and must have values. In production, do not rely on a simplified description alone: use the protocol version and venue rules that apply to your connection, including rules about repeating groups and field ordering where relevant.
 
-## Worked example: calculate a small message carefully
+## Worked example: a little byte counting goes a long way
 
 Consider this illustrative FIX 4.4 message with a `D` message type and a few fields. It is a calculation example, not a recommendation to submit this order or a complete venue-approved order template. Let `␁` represent one SOH byte:
 
@@ -40,7 +40,7 @@ Consider this illustrative FIX 4.4 message with a `D` message type and a few fie
 8=FIX.4.4␁9=30␁35=D␁55=EUR/USD␁54=1␁38=12000␁10=008␁
 ```
 
-First, verify tag 9. BodyLength counts bytes beginning immediately after the SOH that follows tag 9 and ending immediately before tag 10. The body here is:
+Let's check the message one piece at a time. Start with tag 9: BodyLength counts bytes beginning immediately after the SOH that follows tag 9 and ending immediately before tag 10. Here is the part we need to count:
 
 ```text
 35=D␁55=EUR/USD␁54=1␁38=12000␁
@@ -50,7 +50,7 @@ Count each field, including its terminating SOH: `35=D␁` has 5 bytes; `55=EUR/
 
 For the checksum, add the ASCII byte values of every byte from the first `8` through the SOH immediately before tag 10, then take the remainder after division by 256. For this exact prefix, the sum is 2312, so $2312 \bmod 256 = 8$. The trailer value is consequently `10=008`, with the checksum rendered as three decimal digits, followed by the final SOH. This calculation relies on the displayed characters being ASCII and on the SOH bytes being included. In actual software, calculate over the encoded message bytes, not a visually substituted rendering.
 
-The example shows why string concatenation with hand-entered lengths and checksums is fragile. A single field change can alter both derived values. It also demonstrates that valid-looking syntax alone does not establish that a venue will accept a message.
+Those few bytes give us a useful design clue. A single field change can alter both derived values, so hand-entered lengths and checksums are easy to get wrong. Let the encoder do that arithmetic. Even then, valid-looking syntax alone does not establish that a venue will accept a message.
 
 ## Build messages from data and enforce invariants
 
@@ -96,7 +96,7 @@ Other pitfalls sit outside the wire format: trusting stale or malformed input, l
 4. **Where should a strategy’s decision end and venue-specific encoding begin?**  
    **Answer:** The strategy should emit a domain-level proposal; an adapter should validate and encode it according to the target venue’s contract.
 
-The durable lesson is architectural: isolate external protocols, validate data and intent, derive message mechanics rather than hardcoding them, and treat responses as part of the workflow. That discipline is useful wherever software turns uncertain external information into consequential actions.
+Take this checklist to your next adapter or data pipeline: isolate external protocols, validate data and intent, calculate message mechanics, and follow the response through to its outcome. A tiny message has led us to a much larger engineering habit. The same careful handoffs help wherever software turns uncertain external information into consequential actions.
 
 ---
 
