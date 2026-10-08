@@ -95,3 +95,50 @@ A rule that produces the same sequence from the same graph and implementation ch
 ### Workflow orchestration
 
 The coordination of tasks and their dependencies, often including when tasks run and how failures are handled. A topological ordering provides a possible sequence for an acyclic workflow, while production orchestration may additionally require scheduling, retries, monitoring, and provenance.
+
+
+<!-- publication:2026-10-08 -->
+
+## 2026-10-08
+
+Source note: [2026-10-08](articles/2026-10-08-machine-signals-manufacturing-decisions.md).
+
+### Smart manufacturing
+
+A manufacturing approach that connects production operations with data and complementary technologies to improve visibility, coordination, and decision-making. It can include IoT, analytics, automation, cloud services, and enterprise-system integration, rather than referring to one specific machine or platform.
+
+### Digital thread
+
+An integrated view that links information across manufacturing processes and stages of a product's life cycle, such as design, production, use, service, repair, and decommissioning. Useful links require consistent identity and context across systems; sensor installation alone does not guarantee a functioning thread.
+
+### Overall Equipment Effectiveness (OEE)
+
+A metric expressed as the product of availability, performance, and quality. Its value depends on clearly defined time boundaries, speed baselines, and quality denominators. It describes performance under those definitions but does not, by itself, explain causes or prove an intervention worked.
+
+### Operational Technology (OT)
+
+Technology used to monitor or control physical industrial processes. Examples include programmable logic controllers, SCADA, and CNC systems. OT environments can have different availability, network, and security requirements from business-focused IT systems.
+
+### Information Technology (IT)
+
+Technology commonly used to process, store, and exchange organizational information. In manufacturing integrations, IT may consume or contextualize data from OT, but the two environments should not be treated as interchangeable in their operational and security needs.
+
+### Discrete manufacturing
+
+Production of distinct, countable products or parts, such as furniture, machine components, or phones. Individual units or lots may be tracked through production and later life-cycle stages when identifiers and connected records are available.
+
+### Process manufacturing
+
+Production that transforms ingredients or raw materials using recipes and physical or chemical processes. Because inputs and outputs may not be individually countable like discrete items, useful records may focus on batches, recipes, quantities, and process conditions.
+
+### Manufacturing Execution System (MES)
+
+Software that monitors, tracks, controls, or synchronizes production execution, including tasks and schedules. MES capabilities can overlap with broader smart-manufacturing systems, so integration or replacement work should first clarify existing system responsibilities.
+
+### SCADA
+
+Supervisory Control and Data Acquisition systems monitor and control industrial processes, often providing operators with real-time or near-real-time visualization and control interfaces. SCADA may contribute to a wider smart-manufacturing environment but is not equivalent to every capability in that environment.
+
+### Industry 5.0
+
+A human-centric framing of industrial development that emphasizes collaboration between people and machines, sustainability, responsibility, and attention to societal needs. It broadens the goals beyond optimization and efficiency alone.
