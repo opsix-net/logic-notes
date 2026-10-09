@@ -142,3 +142,50 @@ Supervisory Control and Data Acquisition systems monitor and control industrial 
 ### Industry 5.0
 
 A human-centric framing of industrial development that emphasizes collaboration between people and machines, sustainability, responsibility, and attention to societal needs. It broadens the goals beyond optimization and efficiency alone.
+
+
+<!-- publication:2026-10-09 -->
+
+## 2026-10-09
+
+Source note: [2026-10-09](articles/2026-10-09-raw-records-useful-visual-story.md).
+
+### Data visualization
+
+A purposeful visual representation of data, such as a chart, map, or graph, intended to help people inspect or communicate information. A visualization can reveal patterns, trends, and outliers, but its usefulness depends on the underlying data and the choices made in constructing and interpreting the display.
+
+### DUSSSS
+
+A six-part visualization framework named in the chapter: Data, User, Strategy, Structure, Style, and Story. It prompts a designer or engineering team to consider evidence, audience, purpose, organization, appearance, and intended takeaway as connected decisions rather than treating chart styling as the whole task.
+
+### Nominal data
+
+Categorical data whose labels have no inherent ordering, such as service names or colors. Assigning numeric codes to nominal categories does not make them quantities. Charts and calculations should preserve the distinction between category identity and measured magnitude.
+
+### Ordinal data
+
+Categorical data with a meaningful order, such as low, medium, and high. The ordering is informative, but the gaps between levels are not necessarily equal. Treating ordinal codes as measurements with equal intervals requires additional justification.
+
+### Data strategy
+
+Planning for how data are captured, extracted, cleaned, integrated, and maintained for a visualization or analysis. It includes considering source quality and update behavior, so the displayed information is fit for the question and does not imply more freshness or completeness than the pipeline provides.
+
+### Structure
+
+The organization of the data and the presentation, including what appears, in what order, at what level of detail, and how often it refreshes. A clear structure helps users navigate information and understand the relationship between the displayed evidence and the question being asked.
+
+### Outlier
+
+An observation that differs noticeably from others in a dataset or context. An outlier may signal a real unusual event, a measurement problem, or a data-processing issue. Its appearance on a chart is a reason to investigate, not automatic proof that it should be removed.
+
+### JSON Lines
+
+A text format in which each nonblank line contains a separate JSON value, commonly one record per line. Because records can be read independently, JSON Lines is practical for streamed exports and pipeline handoffs. A particular consumer may impose further requirements, such as requiring every record to be an object.
+
+### Field type consistency
+
+The degree to which a named field appears with the same decoded data type across records. A field that alternates between a number and a string may complicate downstream processing. An observed type count is a diagnostic, not a declaration of which type is correct.
+
+### Missing-field count
+
+A count of valid object records that do not contain a particular field. It differs from a field whose value is explicitly null: the field is present in the latter case. Missingness can affect analysis and should be understood before summaries or visualizations are interpreted.
